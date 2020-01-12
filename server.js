@@ -14,4 +14,11 @@ app.use(morgan('dev'));
 
 app.use('/api/v1/bootcamps', bootcamps);
 
-app.listen(process.env.PORT, () => console.log('The server has started.'));
+const server = app.listen(process.env.PORT, () =>
+  console.log('The server has started.')
+);
+
+process.on('unhandledRejection', err => {
+  console.log(`Error: ${err.message}`);
+  server.close(() => process.exit(1));
+})
