@@ -35,7 +35,7 @@ const BootcampSchema = mongoose.Schema({
     type: {
       point: {
         type: GeoPoint,
-        required: true
+        required: true,
       },
       formattedAddress: String,
       street: String,
