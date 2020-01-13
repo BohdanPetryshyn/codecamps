@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const GeoPoint = require('./GeoPoint');
 
 const BootcampSchema = mongoose.Schema({
   name: {
@@ -32,20 +33,18 @@ const BootcampSchema = mongoose.Schema({
   },
   location: {
     type: {
-      type: String,
-      enum: ['Point'],
-      required: true,
+      point: {
+        type: GeoPoint,
+        required: true
+      },
+      formattedAddress: String,
+      street: String,
+      city: String,
+      state: String,
+      zipcode: String,
+      country: String,
     },
-    coordinates: {
-      type: [Number],
-      required: true,
-    },
-    formattedAddress: String,
-    street: String,
-    city: String,
-    state: String,
-    zipcode: String,
-    country: String,
+    required: false,
   },
   careers: {
     type: [String],
