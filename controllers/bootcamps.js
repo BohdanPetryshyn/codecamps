@@ -6,11 +6,11 @@ exports.getBootcamps = async (req, res, next) => {
     .json(bootcamps);
 };
 
-exports.getBootcamp = (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    data: { message: `Getting bootcamp with id=${req.params.id}` },
-  });
+exports.getBootcamp = async (req, res, next) => {
+  const id = req.params.id;
+  const bootcamp = await Bootcamp.findById(id);
+  res.status(200)
+    .json(bootcamp);
 };
 
 exports.createBootcamp = async (req, res, next) => {
