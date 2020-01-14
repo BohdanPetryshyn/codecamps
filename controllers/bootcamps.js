@@ -27,16 +27,21 @@ exports.createBootcamp = async (req, res, next) => {
 
 exports.updateBootcamp = async (req, res, next) => {
   const id = req.params.id;
-  const bootcamp = await Bootcamp.findByIdAndUpdate(id, req.body);
+  const bootcamp = await Bootcamp.findByIdAndUpdate(id, req.body, {
+    runValidators: true,
+    new: true,
+  });
   res.status(200).json({
     success: true,
     data: bootcamp,
   });
 };
 
-exports.deleteBootcamp = (req, res, next) => {
+exports.deleteBootcamp = async (req, res, next) => {
+  const id = req.params.id;
+  await Bootcamp.findByIdAndDelete(id);
   res.status(200).json({
     success: true,
-    data: { message: `Deleting bootcamp with id=${req.params.id}` },
+    data: {},
   });
 };
