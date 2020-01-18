@@ -1,4 +1,5 @@
 const express = require('express');
+require('colors');
 const bootcamps = require('./routes/bootcamps');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
@@ -22,10 +23,10 @@ app.use(handleApiError);
 app.use(handleError);
 
 const server = app.listen(process.env.PORT, () =>
-  console.log('The server has started.')
+  console.log('The server has started.'.green)
 );
 
 process.on('unhandledRejection', err => {
-  console.log(`Error: ${err.message}`);
+  console.log(`Error: ${err.message}`.red);
   server.close(() => process.exit(1));
 });

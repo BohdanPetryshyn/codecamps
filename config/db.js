@@ -9,5 +9,5 @@ module.exports = async () => {
     }
   );
 
-  console.log(`MongoDB connected at host=${connection.connection.host}`);
+  console.log(`MongoDB connected at host=${connection.connection.host}`.cyan);
 };
