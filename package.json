@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "prettify": "prettier --write \"**/*.js\"\n"
+    "prettify": "prettier --write \"**/*.js\"\n",
+    "seed": "node seeder seed",
+    "delete": "node seeder delete"
   },
   "keywords": [],
   "author": "",
