@@ -6,6 +6,7 @@ module.exports = async () => {
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     }
   );
 
