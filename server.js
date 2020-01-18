@@ -3,6 +3,7 @@ const bootcamps = require('./routes/bootcamps');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const logError = require('./middleware/logError');
+const handleApiError = require('./middleware/handleApiError');
 
 require('dotenv').config({ path: './config/config.env' });
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/v1/bootcamps', bootcamps);
 
 app.use(logError);
+app.use(handleApiError);
 
 const server = app.listen(process.env.PORT, () =>
   console.log('The server has started.')
