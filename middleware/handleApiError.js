@@ -8,8 +8,9 @@ const handleApiError = (err, req, res, next) => {
         message: err.message,
       },
     });
+  } else {
+    next(err);
   }
-  next(err);
 };
 
 module.exports = handleApiError;
