@@ -1,13 +1,13 @@
-const express = require('express');
+require('dotenv').config({ path: './config/config.env' });
 require('colors');
+
+const express = require('express');
 const bootcamps = require('./routes/bootcamps');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const logError = require('./middleware/logError');
 const handleApiError = require('./middleware/handleApiError');
 const handleError = require('./middleware/handleError');
-
-require('dotenv').config({ path: './config/config.env' });
 
 connectDB();
 
