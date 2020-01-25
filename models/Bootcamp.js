@@ -103,7 +103,7 @@ BootcampSchema.pre('save', async function(next) {
 
   this.location = {
     point: {
-      type: 'Point1',
+      type: 'Point',
       coordinates: [geocodeLocation.longitude, geocodeLocation.latitude],
     },
     formattedAddress: geocodeLocation.formattedAddress,
