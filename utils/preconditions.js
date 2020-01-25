@@ -11,4 +11,4 @@ exports.ensureNumber = (value, message) => {
   const parsed = Number(value);
   if (isNaN(parsed)) throw new ApiError(400, message);
   return parsed;
-}
+};
