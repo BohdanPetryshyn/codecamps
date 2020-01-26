@@ -9,6 +9,8 @@ const {
   deleteBootcamp,
 } = require('../controllers/bootcamps');
 
+const { getBootcampCourses } = require('../controllers/courses');
+
 const router = express.Router();
 
 router
@@ -23,5 +25,7 @@ router
   .get(getBootcamp)
   .put(updateBootcamp)
   .delete(deleteBootcamp);
+
+router.route('/:id/courses').get(getBootcampCourses);
 
 module.exports = router;

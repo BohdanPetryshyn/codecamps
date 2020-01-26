@@ -3,6 +3,7 @@ require('colors');
 
 const express = require('express');
 const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const logError = require('./middleware/logError');
@@ -17,6 +18,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api/v1/bootcamps', bootcamps);
+app.use('/api/v1/courses', courses);
 
 app.use(logError);
 app.use(handleApiError);

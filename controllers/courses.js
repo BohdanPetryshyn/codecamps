@@ -1,8 +1,8 @@
 const Course = require('../models/Course');
 const passErrors = require('../utils/passErrors');
 
-exports.getCourses = passErrors((req, res, next) => {
-  const courses = Course.find();
+exports.getCourses = passErrors(async (req, res, next) => {
+  const courses = await Course.find();
   res.status(200).json({
     success: true,
     count: courses.length,
@@ -10,14 +10,14 @@ exports.getCourses = passErrors((req, res, next) => {
   });
 });
 
-exports.getBootcampCourses = passErrors((req, res, next) => {
-  const bootcampId = req.params.bootcampId;
+exports.getBootcampCourses = passErrors(async (req, res, next) => {
+  const bootcampId = req.params.id;
 
-  const courses = Course.find({bootcamp: bootcampId});
+  const courses = await Course.find({ bootcamp: bootcampId });
 
-   res.status(200).json({
+  res.status(200).json({
     success: true,
     count: courses.length,
     data: courses,
-  })
+  });
 });
