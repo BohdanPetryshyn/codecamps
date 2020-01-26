@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const { Schema: { ObjectId }} = mongoose;
+const {
+  Schema: { ObjectId },
+} = mongoose;
 
 const CourseSchema = new mongoose.Schema({
   title: {
@@ -7,7 +9,7 @@ const CourseSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    maxlength: 50
+    maxlength: 50,
   },
   description: {
     type: String,
@@ -18,20 +20,20 @@ const CourseSchema = new mongoose.Schema({
     type: Number,
     required: true,
     validate: {
-      validator: Number.isInteger
-    }
+      validator: Number.isInteger,
+    },
   },
   tuition: {
     type: Number,
     required: true,
     validate: {
-      validator: Number.isInteger
-    }
+      validator: Number.isInteger,
+    },
   },
   minimumSkill: {
     type: String,
     enum: ['beginner', 'intermediate', 'advanced'],
-    required: true
+    required: true,
   },
   scholarhipsAvailable: {
     type: Boolean,
@@ -44,8 +46,8 @@ const CourseSchema = new mongoose.Schema({
   bootcamp: {
     type: ObjectId,
     ref: 'Bootcamp',
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 module.exports = mongoose.model('Course', CourseSchema);
