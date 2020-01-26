@@ -4,6 +4,7 @@ require('colors');
 const fs = require('fs');
 const util = require('util');
 const Bootcamp = require('./models/Bootcamp');
+const Course = require('./models/Course');
 
 const connectDb = require('./config/db');
 
@@ -38,6 +39,7 @@ const seedData = async () => {
 
   try {
     await seedResource('bootcamp', Bootcamp);
+    await seedResource('course', Course);
     process.exit(0);
   } catch (err) {
     console.log(err.message.red.underline);
@@ -54,6 +56,7 @@ const deleteData = async () => {
 
   try {
     await deleteResource('bootcamp', Bootcamp);
+    await deleteResource('course', Course);
     process.exit(0);
   } catch (err) {
     console.log(err.message.red.underline);
