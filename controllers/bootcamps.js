@@ -10,7 +10,7 @@ const PARAMETER_NOT_A_NUMBER_MESSAGE =
   'query parameter is absent or not a number.';
 
 exports.getBootcamps = passErrors(async (req, res) => {
-  const bootcamps = await Bootcamp.find();
+  const bootcamps = await Bootcamp.find().populate('courses');
   res.status(200).json({
     success: true,
     count: bootcamps.length,
@@ -20,7 +20,7 @@ exports.getBootcamps = passErrors(async (req, res) => {
 
 exports.getBootcamp = passErrors(async (req, res) => {
   const id = req.params.id;
-  const bootcamp = await Bootcamp.findById(id);
+  const bootcamp = await Bootcamp.findById(id).populate('courses');
 
   if (!bootcamp) throw new ApiError(404, messages.bootcampNotFound(id));
 

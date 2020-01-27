@@ -90,6 +90,9 @@ const BootcampSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+}, {
+  toJSON: { virtuals: true},
+  toObject: {virtuals: true}
 });
 
 BootcampSchema.pre('save', function(next) {
@@ -115,5 +118,12 @@ BootcampSchema.pre('save', async function(next) {
 
   next();
 });
+
+BootcampSchema.virtual('courses', {
+  ref: 'Course',
+  localField: '_id',
+  foreignField: 'bootcamp',
+  justOne: false,
+})
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);
