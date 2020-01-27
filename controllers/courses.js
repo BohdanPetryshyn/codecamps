@@ -1,7 +1,9 @@
 const Course = require('../models/Course');
+const Bootcamp = require('../models/Bootcamp');
 const passErrors = require('../utils/passErrors');
 const messages = require('../utils/messages');
 const ApiError = require('../utils/ApiError');
+const preconditions = require('../utils/preconditions');
 
 exports.getCourses = passErrors(async (req, res) => {
   const courses = await Course.find().populate({
@@ -44,5 +46,24 @@ exports.getBootcampCourses = passErrors(async (req, res) => {
     success: true,
     count: courses.length,
     data: courses,
+  });
+});
+
+exports.createCourse = passErrors(async (req, res) => {
+  const bootcampId = req.params.id;
+  preconditions.ensureObjectWithIdExists(
+    Bootcamp,
+    messages.bootcampNotFound(bootcampId)
+  );
+
+  const course = {
+    ...req.body,
+    bootcamp: bootcampId,
+  };
+  const createdCourse = await Course.create(course);
+
+  res.status(200).json({
+    success: true,
+    data: createdCourse,
   });
 });

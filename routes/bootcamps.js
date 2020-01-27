@@ -9,7 +9,7 @@ const {
   deleteBootcamp,
 } = require('../controllers/bootcamps');
 
-const { getBootcampCourses } = require('../controllers/courses');
+const { getBootcampCourses, createCourse } = require('../controllers/courses');
 
 const router = express.Router();
 
@@ -26,6 +26,9 @@ router
   .put(updateBootcamp)
   .delete(deleteBootcamp);
 
-router.route('/:id/courses').get(getBootcampCourses);
+router
+  .route('/:id/courses')
+  .get(getBootcampCourses)
+  .post(createCourse);
 
 module.exports = router;

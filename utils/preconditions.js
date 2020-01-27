@@ -12,3 +12,8 @@ exports.ensureNumber = (value, message) => {
   if (isNaN(parsed)) throw new ApiError(400, message);
   return parsed;
 };
+
+exports.ensureObjectWithIdExists = async (Model, id, message) => {
+  const object = await Model.findById(id);
+  if (!object) throw new ApiError(404, message);
+};
