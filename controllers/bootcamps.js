@@ -84,9 +84,11 @@ exports.updateBootcamp = passErrors(async (req, res) => {
 
 exports.deleteBootcamp = passErrors(async (req, res) => {
   const id = req.params.id;
-  const bootcamp = await Bootcamp.findByIdAndDelete(id);
+  const bootcamp = await Bootcamp.findById(id);
 
   if (!bootcamp) throw new ApiError(404, messages.bootcampNotFound(id));
+
+  bootcamp.remove();
 
   res.status(200).json({
     success: true,
