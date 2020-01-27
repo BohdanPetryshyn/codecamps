@@ -51,8 +51,9 @@ exports.getBootcampCourses = passErrors(async (req, res) => {
 
 exports.createCourse = passErrors(async (req, res) => {
   const bootcampId = req.params.id;
-  preconditions.ensureObjectWithIdExists(
+  await preconditions.ensureObjectWithIdExists(
     Bootcamp,
+    bootcampId,
     messages.bootcampNotFound(bootcampId)
   );
 
