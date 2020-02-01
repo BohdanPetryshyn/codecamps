@@ -2,6 +2,7 @@ require('dotenv').config({ path: './config/config.env' });
 require('colors');
 
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
 const auth = require('./routes/auth');
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);

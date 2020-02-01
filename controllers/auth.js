@@ -8,7 +8,10 @@ exports.register = passErrors(async (req, res) => {
 
   const token = user.signJwt();
 
-  res.status(200).json({ success: true, token });
+  res
+    .status(200)
+    .cookie('token', token, cookieOptions())
+    .json({ success: true, token });
 });
 
 exports.login = passErrors(async (req, res) => {
@@ -30,8 +33,19 @@ exports.login = passErrors(async (req, res) => {
 
   const token = user.signJwt();
 
-  res.status(200).json({
-    success: true,
-    token,
-  });
+  res
+    .status(200)
+    .cookie('token', token, cookieOptions())
+    .json({
+      success: true,
+      token,
+    });
 });
+
+const cookieOptions = () => ({
+  expires: cookieExpires(),
+  httpOnly: true,
+});
+
+const cookieExpires = () =>
+  new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN);
