@@ -42,6 +42,13 @@ exports.login = passErrors(async (req, res) => {
     });
 });
 
+exports.getSelf = passErrors(async (req, res) => {
+  res.status(200).json({
+    success: true,
+    data: req.user,
+  });
+});
+
 const cookieOptions = () => ({
   expires: cookieExpires(),
   httpOnly: true,
