@@ -81,4 +81,16 @@ UserSchema.methods.unsetResetPasswordToken = function() {
   this.save();
 };
 
+UserSchema.statics.getByResetPasswordToken = function(token) {
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+
+  return this.findOne({
+    resetPasswordToken: hashedToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+};
+
 module.exports = mongoose.model('User', UserSchema);

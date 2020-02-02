@@ -61,6 +61,30 @@ exports.forgotPassword = passErrors(async (req, res) => {
   });
 });
 
+exports.resetPassword = passErrors(async (req, res) => {
+  const password = req.body.password;
+  if (!password) {
+    throw new ApiError(400, 'New password is missed');
+  }
+
+  const token = req.query.token;
+  if (!token) {
+    throw new ApiError(401, 'Reset password token is missed.');
+  }
+
+  const user = await User.getByResetPasswordToken(token);
+  if (!user) {
+    throw new ApiError(401, 'Reset password token is invalid or expired.');
+  }
+
+  user.password = password;
+  user.save();
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 exports.getSelf = passErrors(async (req, res) => {
   res.status(200).json({
     success: true,
