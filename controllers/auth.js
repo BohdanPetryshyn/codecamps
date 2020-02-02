@@ -42,7 +42,7 @@ exports.login = passErrors(async (req, res) => {
     });
 });
 
-exports.resetPassword = passErrors(async (req, res) => {
+exports.forgotPassword = passErrors(async (req, res) => {
   const { email } = req.body;
   if (!email) {
     throw new ApiError(400, 'Email is missed.');
