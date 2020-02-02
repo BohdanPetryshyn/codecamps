@@ -2,6 +2,7 @@ const User = require('../models/User');
 const passErrors = require('../utils/passErrors');
 const ApiError = require('../utils/ApiError');
 const messages = require('../utils/messages');
+const sendResetPasswordEmail = require('../utils/sendResetPasswordEmail');
 
 exports.register = passErrors(async (req, res) => {
   const user = await User.create(req.body);
@@ -53,11 +54,10 @@ exports.forgotPassword = passErrors(async (req, res) => {
     throw new ApiError(404, messages.noUserWithSpecifiedEmail(email));
   }
 
-  const resetPasswordToken = user.setResetPasswordToken();
+  await sendResetPasswordEmail(req, user);
 
   res.status(200).json({
     success: true,
-    token: resetPasswordToken,
   });
 });
 

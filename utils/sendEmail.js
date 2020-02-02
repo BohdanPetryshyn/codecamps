@@ -14,7 +14,7 @@ module.exports = async (toEmail, subject, text) => {
     from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
     to: toEmail,
     subject,
-    message: text,
+    text,
   };
 
   const info = await transport.sendMail(message);

@@ -75,4 +75,10 @@ UserSchema.methods.setResetPasswordToken = function() {
   return resetPasswordToken;
 };
 
+UserSchema.methods.unsetResetPasswordToken = function() {
+  this.resetPasswordExpire = undefined;
+  this.resetPasswordToken = undefined;
+  this.save();
+};
+
 module.exports = mongoose.model('User', UserSchema);
