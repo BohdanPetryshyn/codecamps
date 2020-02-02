@@ -18,7 +18,7 @@ exports.login = passErrors(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new ApiError(401, 'Email or password is missed.');
+    throw new ApiError(400, 'Email or password is missed.');
   }
 
   const user = await User.findOne({ email }).select('+password');
@@ -40,6 +40,25 @@ exports.login = passErrors(async (req, res) => {
       success: true,
       token,
     });
+});
+
+exports.resetPassword = passErrors(async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    throw new ApiError(400, 'Email is missed.');
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, messages.noUserWithSpecifiedEmail(email));
+  }
+
+  const resetPasswordToken = user.setResetPasswordToken();
+
+  res.status(200).json({
+    success: true,
+    token: resetPasswordToken,
+  });
 });
 
 exports.getSelf = passErrors(async (req, res) => {
